@@ -12,7 +12,7 @@ SpiParametar spi2_h = {
 };
 
 HttpParametar http_h = {
-    .config = HTTPD_DEFAULT_CONFIG(),
+    .config_server = HTTPD_DEFAULT_CONFIG(),
     .rx_buf = {
         .max_len = JSON_PKT_LEN
     },
@@ -24,6 +24,11 @@ HttpParametar http_h = {
     },
     .tx_buf = {
         .max_len = JSON_PKT_LEN
+    },
+    .config_client = {
+        .url = "http://192.168.0.21/set-temperature",
+        .method = HTTP_METHOD_POST,
+        .timeout_ms = 5000,
     },
 };
 

@@ -5,7 +5,21 @@
 #include "HY_MOD/http/main.h"
 #include "HY_MOD/spi/main.h"
 
-void StartSpi2Task(void *argument)
+void StartHttpTask(void *argument)
+{
+    my_wifi_connect();
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    HttpParametar *http = &http_h;
+    RESULT_CHECK_HANDLE(http_start_server(http));
+    while (1)
+    {
+        // http_send();
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+    vTaskDelete(NULL);
+}
+
+void StartSpiTask(void *argument)
 {
     static const char *TAG = "MY_SPI_TASK";
     json_pkt_pool_init(&json_pkt_pool);
@@ -128,12 +142,9 @@ error:
 
 void app_main(void)
 {
-    my_wifi_connect();
+    xTaskCreate(StartHttpTask, "HTTP_TASK", 4096, NULL, 5, NULL);
     vTaskDelay(pdMS_TO_TICKS(1000));
-    http_start_server(&http_h);
-    // http_send();
-    vTaskDelay(pdMS_TO_TICKS(1000));
-    xTaskCreate(StartSpi2Task, "SPI_Task", 4096, NULL, 10, NULL);
+    xTaskCreate(StartSpiTask, "SPI_Task", 4096, NULL, 10, NULL);
 }
 
 void http_recv_register(HttpParametar *http)
