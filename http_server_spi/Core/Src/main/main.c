@@ -48,7 +48,7 @@ void StartSpiTask(void *argument)
             }
             case SPI_STATE_FINISH:
             {
-                spi_recv_start(spi, sizeof(SPI_MASTER_ASK), spi->rx_buf);
+                spi_recv_start(spi, sizeof(SPI_MASTER_ASK), spi->rx_buf, 10000);
                 spi2_h.state = SPI_STATE_RECV_HEADER;
                 break;
             }
@@ -70,7 +70,7 @@ void StartSpiTask(void *argument)
                     uint16_t payload_len = var_u8_to_u16_be(spi->rx_buf + 3);
                     if (payload_len > JSON_PKT_LEN) goto error;
                     spi->rx_buf_len = payload_len;
-                    spi_recv_start(spi, spi->rx_buf_len, spi->rx_buf);
+                    spi_recv_start(spi, spi->rx_buf_len, spi->rx_buf, 500);
                 }
                 else goto error;
                 break;
@@ -82,7 +82,7 @@ void StartSpiTask(void *argument)
                 {
                     spi->tx_buf_len = sizeof(SPI_SLAVE_EMP);
                     memcpy(spi->tx_buf, SPI_SLAVE_EMP, spi->tx_buf_len);
-                    spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf);
+                    spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf, 500);
                     ESP_LOGI(TAG, "Send E");
                     spi2_h.state = SPI_STATE_FINISH;
                 }
@@ -92,7 +92,7 @@ void StartSpiTask(void *argument)
                     spi->tx_buf_len = sizeof(SPI_LENGTH_H);
                     memcpy(spi->tx_buf, SPI_LENGTH_H, spi->tx_buf_len);
                     var_u16_to_u8_be(tx_pkt->len, (spi->tx_buf + 3));
-                    spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf);
+                    spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf, 500);
                     ESP_LOGI(TAG, "Send H: pl= %d, sl= %d", tx_pkt->len, spi->tx_buf_len);
                     // ESP_LOGI(TAG, "Send H");
                     spi2_h.state = SPI_STATE_TRSM_BODY;
@@ -104,7 +104,7 @@ void StartSpiTask(void *argument)
                 if (tx_pkt == NULL) goto error;
                 spi->tx_buf_len = tx_pkt->len;
                 memcpy(spi->tx_buf, tx_pkt->data, spi->tx_buf_len);
-                spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf);
+                spi_trsm_start(spi, spi->tx_buf_len, spi->tx_buf, 500);
                 // ESP_LOGI(TAG, "Send B: %.*s", spi->tx_buf_len, spi->tx_buf);
                 ESP_LOGI(TAG, "Send B");
                 spi2_h.state = SPI_STATE_FINISH;
