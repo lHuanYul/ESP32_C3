@@ -4,9 +4,9 @@
 SpiParametar spi2_h = {
     .const_h = {
         .SPIx_HOST = SPI2_HOST,
+        .SCK = 6,
         .MISO = 2,
         .MOSI = 7,
-        .SCK = 6,
         .NSS = 10,
     },
 };
