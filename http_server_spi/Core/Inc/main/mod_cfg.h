@@ -5,7 +5,7 @@
 #include "HY_MOD/http/basic.h"
 #include "HY_MOD/packet/json.h"
 
-extern SpiParametar spi2_h;
+extern SpiJsonParametar spi2_h;
 extern HttpParametar http_h;
 
 extern JsonPktPool json_pkt_pool;

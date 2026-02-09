@@ -1,13 +1,15 @@
 #include "main/mod_cfg.h"
 #include "HY_MOD/http/receive.h"
 
-SpiParametar spi2_h = {
-    .const_h = {
-        .SPIx_HOST = SPI2_HOST,
-        .SCK = 6,
-        .MISO = 2,
-        .MOSI = 7,
-        .NSS = 10,
+SpiJsonParametar spi2_h = {
+    .spi_p = {
+        .const_h = {
+            .SPIx_HOST = SPI2_HOST,
+            .SCK = 6,
+            .MISO = 2,
+            .MOSI = 7,
+            .NSS = 10,
+        },
     },
 };
 
