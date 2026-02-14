@@ -1,0 +1,63 @@
+{
+	"folders": [
+		{
+			"name": "main",
+			"path": "."
+		},
+		{
+			"name": "HY_MOD",
+			"path": "../../HY_MCU_MOD/ESP32_MOD"
+		}
+	],
+	"settings": {
+		"C_Cpp.intelliSenseEngine": "default",
+		"idf.espIdfPathWin": "c:\\Program_HY\\esp32\\v5.4.2\\esp-idf",
+		"idf.toolsPathWin": "c:\\Program_HY\\esp32\\.espressif",
+		"idf.pythonInstallPath": "c:\\Program_HY\\esp32\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+		"idf.portWin": "COM4",
+		"idf.customExtraVars": {
+			"IDF_TARGET": "esp32c3"
+		},
+		"clangd.path": "c:\\Program_HY\\esp32\\.espressif\\tools\\esp-clang\\esp-18.1.2_20240912\\esp-clang\\bin\\clangd.exe",
+		"clangd.arguments": [
+			"--background-index",
+			"--query-driver=c:\\Program_HY\\esp32\\.espressif\\tools\\riscv32-esp-elf\\esp-14.2.0_20241119\\riscv32-esp-elf\\bin\\riscv32-esp-elf-gcc.exe",
+			"--compile-commands-dir=c:\\Users\\HuanYu\\Desktop\\Codes\\ESP32_C3_SUPER_MINI\\esp_http_client\\build"
+		],
+		"idf.flashType": "UART",
+		"launch": {
+			"version": "0.2.0",
+			"configurations": [
+				{
+				"type": "gdbtarget",
+				"request": "attach",
+				"name": "Eclipse CDT GDB Adapter"
+				},
+				{
+				"type": "espidf",
+				"name": "Launch",
+				"request": "launch"
+				}
+			]
+		},
+		"C_Cpp.default.compilerPath": "${config:idf.toolsPathWin}\\tools\\riscv32-esp-elf\\esp-14.2.0_20241119\\riscv32-esp-elf\\bin\\riscv32-esp-elf-gcc.exe",
+		"C_Cpp.default.compileCommands": "${config:idf.buildPath}/compile_commands.json",
+		"C_Cpp.default.includePath": [
+			"${config:idf.espIdfPath}/components/**",
+			"${config:idf.espIdfPathWin}/components/**",
+			"${config:idf.toolsPathWin}/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/riscv32-esp-elf/include/**",
+			"${workspaceFolder:HY_MOD}/Inc/**",
+
+			"${workspaceFolder:main}/Core/Inc/**"
+		],
+		"C_Cpp.default.intelliSenseMode": "gcc-x64",
+		"C_Cpp.default.browse.path": [
+			"${config:idf.espIdfPath}/components",
+			"${config:idf.espIdfPathWin}/components",
+			"${workspaceFolder:HY_MOD}/Inc/**",
+
+			"${workspaceFolder:main}/Core/Inc"
+		],
+        "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true
+	}
+}
